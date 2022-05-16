@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <div th:replace="fragments :: head"></div>
+</head>
+
+<body>
+<header th:replace="fragments :: header"></header>
+
+</body>
+
+<main>
+    <h1 th:text="${user.userProfile.firstName} +' '+ ${user.userProfile.lastName}"></h1>
+    <p>First Name: <span th:text="${user.userProfile.firstName}"></span></p>
+    <p>Last Name: <span th:text="${user.userProfile.lastName}"></span></p>
+    <p>Email: <span th:text="${user.userProfile.email}"></span></p>
+    <p>Phone Number: <span th:text="${user.userProfile.phoneNumber}"></span></p>
+    <p>Zip Code: <span th:text="${user.userProfile.zipCode}"></span></p>
+    <form class="noPaddingLeft" th:action="@{/users/edit/{id}(id=${user.id})}" method="get">
+        <button class="submit">Edit User</button>
+    </form>
+<div>
+    <a class="nav-link" href="/skills/create">Add New Skill</a>
+</div>
+
+</main>
+</body>
+</html>

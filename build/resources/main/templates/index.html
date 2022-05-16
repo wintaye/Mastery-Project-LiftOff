@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <div th:replace="fragments :: head"></div>
+</head>
+
+<body>
+
+<header th:replace="fragments :: header"></header>
+<main>
+    <p>Welcome, <span th:text="${user.username}"></span></p>
+
+            <li class="nav-link"><a th:href="@{/users/view/{id}(id=${user.id})}">User Profile</a></li>
+    <div>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>Skill</th>
+                <th>Skill Category</th>
+            </tr>
+            </thead>
+            <tr th:each="skill : ${skills}">
+                <td th:text="${skill.name}"></a></td>
+                <td th:text="${skill.catName.catName}"></a></td>
+            </tr>
+        </table>
+    </div>
+<div>
+    <li class="nav-link"><a th:href="@{/skills/create/{id}(id=${user.id})}">Add New Skill</a></li>
+</div>
+</main>
+</body>
+</html>
+
+
+

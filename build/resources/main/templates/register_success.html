@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
+
+    <title>Successfully registered</title>
+</head>
+
+<body>
+
+<div>
+    <h2>Congratulations!! You Are Now Successfully Registered!</h2>
+</div>
+
+<form th:action="@{/login}" method="post">
+    <p>Click here to Log in</p><input type="submit" value="LOG In">
+
+</form>
+
+</body>
+</html>

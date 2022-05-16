@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+<div class="container body-content">
+    <table class="control-form" th:each="user:${users}">
+        <tr>
+        <th>ID</th>
+<!--        <td th:text="${user.Id}">-->
+          <td th:href="@{/users/view/{id}(id=${user.id})}"> </td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td th:text="${user.userProfile.firstName} + '' + ${user.userProfile.lastName}"></td>
+        </tr>
+        <tr >
+            <th>Email</th>
+            <td th:text="${user.userProfile.email}"></td>
+        </tr>
+        <tr >
+            <th>Phone</th>
+            <td th:text="${user.userProfile.phoneNumber}"></td>
+        </tr>
+        </tr>
+        <tr >
+            <th>ZipCode</th>
+            <td th:text="${user.userProfile.zipCode}"></td>
+    </table>
+</div>
+
+
+
+</body>
+</html>
+

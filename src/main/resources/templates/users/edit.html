@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <div th:replace="fragments :: head"></div>
+
+</head>
+<body>
+<header th:replace="fragments :: header"></header>
+<main>
+    <form method="post" th:object="${user}">
+
+        <label>First Name: <input type="text" th:field="${user.firstName}"></label>
+        <p class="errors" th:errors="${user.firstName}"></p>
+        <label>Last Name: <input type="text" th:field="${user.lastName}"></label>
+        <p class="errors" th:errors="${user.lastName}"></p>
+        <label>Phone Number: <input type="text" th:field="${user.phoneNumber}"></label>
+        <p class="errors" th:errors="${user.phoneNumber}"></p>
+        <label>Email: <input type="text" th:field="${user.email}"></label>
+        <p class="errors" th:errors="${user.email}"></p>
+        <label>Zip Code: <input type="text" th:field="${user.ZipCode}"></label>
+        <p class="errors" th:errors="${user.zipCode}"></p>
+        <input type="submit" value="Save Changes">
+    </form>
+</main>
+
+</body>
+</html>
