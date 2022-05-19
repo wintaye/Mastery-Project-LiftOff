@@ -25,6 +25,16 @@
 <!--            <p class="errors" th:errors="${skill.catName}"></p>-->
         </div>
         <div class="form-group">
+            <label>Skill Tag
+            <select th:field="${skill.skillTag}">
+                <option th:each="tag : ${tags}"
+                        th:value="${tag}"
+                        th:text="${tag.displayName}"
+                ></option>
+            </select>
+            </label>
+        </div>
+        <div class="form-group">
         <input type="submit" value="Create" class="btn btn-success">
         </div>
     </form>

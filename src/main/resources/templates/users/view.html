@@ -20,7 +20,7 @@
         <button class="submit">Edit User</button>
     </form>
 <div>
-    <a class="nav-link" href="/skills/create">Add New Skill</a>
+    <li class="nav-link"><a th:href="@{/skills/create/{id}(id=${user.id})}">Add New Skill</a></li>
 </div>
 
 </main>

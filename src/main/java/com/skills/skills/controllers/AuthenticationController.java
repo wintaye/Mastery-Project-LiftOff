@@ -66,11 +66,12 @@ public class AuthenticationController {
 //        return "index";
 //    }
 
-    @GetMapping
-    public String displayProfilePageAfterNewSkillCreated (HttpSession session, Model model) {
+    @GetMapping("")
+    public String displayPageAfterLogin (HttpSession session, Model model) {
         User user = getUserFormSession(session);
         model.addAttribute("user", user);
         model.addAttribute("skills", user.getSkills());
+        model.addAttribute("tag", user.getSkills());
         return "index";
     }
 

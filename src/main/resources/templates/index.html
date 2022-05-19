@@ -17,11 +17,13 @@
             <tr>
                 <th>Skill</th>
                 <th>Skill Category</th>
+                <th>Tag</th>
             </tr>
             </thead>
             <tr th:each="skill : ${skills}">
                 <td th:text="${skill.name}"></a></td>
                 <td th:text="${skill.catName.catName}"></a></td>
+                <td th:text="${skill.skillTag}"></a></td>
             </tr>
         </table>
     </div>

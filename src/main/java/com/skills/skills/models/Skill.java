@@ -16,9 +16,12 @@ public class Skill extends AbstractEntity {
     @NotNull(message = "Skill category is required")
     private SkillsCategory catName;
 
-    public Skill(String name, SkillsCategory catName) {
+    private String skillTag;
+
+    public Skill(String name, SkillsCategory catName, String skillTag) {
         this.name = name;
         this.catName = catName;
+        this.skillTag = skillTag;
     }
 
     public Skill() {}
@@ -30,20 +33,10 @@ public class Skill extends AbstractEntity {
     public SkillsCategory getCatName() { return catName; }
 
     public void setCatName(SkillsCategory catName) { this.catName = catName; }
-}
-//    public SkillDescription getDescription() {
-//        return description;
-//    }
-//
-//    public void setDescription(SkillDescription description) {
-//        this.description = description;
-//    }
 
-//    public Tag getTag() {
-//        return tag;
-//    }
-//
-//    public void setTag(Tag tag) {
-//        this.tag = tag;
-//    }
+    public String getSkillTag() { return skillTag; }
+
+    public void setSkillTag(String skillTag) { this.skillTag = skillTag; }
+}
+
 
