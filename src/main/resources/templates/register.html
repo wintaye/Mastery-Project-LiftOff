@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+<body>
 
-<header th:replace="fragments :: header"></header>
-
+<div th:replace="fragments :: navbar"></div>
 <body class="container">
 
     <form method="post">
@@ -42,10 +41,8 @@
         <p class="errors" th:errors="${registerFormDTO.verifyPassword}"></p>
         <input type="submit" value="REGISTER" class="submit">
     </form>
-    <p>Already have An account? <a href="/login">Log In here.</a></p>
+    <p>Already have an account? <a href="/login">Log In here.</a></p>
 
 </main>
 </body>
 </html>
-
-

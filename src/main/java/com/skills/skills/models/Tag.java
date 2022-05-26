@@ -1,24 +1,28 @@
 package com.skills.skills.models;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
-public enum Tag {
+@Entity
+public class Tag extends AbstractEntity{
 
-    WANT_TO_LEARN("Want to Learn"),
-    WANT_TO_SHARE("Want to Share"),
-    SKILLS_I_HAVE("Skills I Have");
+    @OneToMany(mappedBy = "tagName")
+    private final List<Skill> skills = new ArrayList<>();
 
 
-    private final String displayName;
+    private String tagName;
 
-    Tag(String displayName) {
-        this.displayName = displayName;
+    public Tag(String tagName) { this.tagName = tagName; }
+    public Tag() {}
+
+    public String getTagName() {
+        return tagName;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
 }

@@ -2,11 +2,11 @@ package com.skills.skills.controllers;
 
 import com.skills.skills.data.SkillsCategoryRepository;
 import com.skills.skills.data.SkillsRepository;
+import com.skills.skills.data.TagRepository;
 import com.skills.skills.data.UserRepository;
 import com.skills.skills.models.Skill;
 import com.skills.skills.models.Tag;
 import com.skills.skills.models.User;
-import com.skills.skills.models.dto.UserSkillDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.HTML;
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -22,6 +21,8 @@ import java.util.Optional;
 @RequestMapping("")
 public class SkillsController {
 
+    @Autowired
+    public TagRepository tagRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -50,14 +51,15 @@ public class SkillsController {
     }
 
 
-    //responds to requests at skills/create?userId=##
+    //responds to request at skills/create?userId=##
     @GetMapping("skills/create/{userId}")
     public String createNewSkill (@PathVariable Integer userId, Model model){
         Optional<User> result = userRepository.findById(userId);
         User currentUser = result.get();
         model.addAttribute("title", "Create New Skill");
         model.addAttribute(new Skill());
-        model.addAttribute("tags",Tag.values());
+        model.addAttribute(new Tag());
+        model.addAttribute("tags", tagRepository.findAll());
         model.addAttribute("categories", skillsCategoryRepository.findAll());
         return  "skills/create";
     }
@@ -71,11 +73,32 @@ public class SkillsController {
         skillsRepository.save(newSkill);
         //add skill to user
         currentUser.addSkillsToProfile(newSkill);
-        //resave user to update
+        //re-save user to update
         userRepository.save(currentUser);
         model.addAttribute("skills", currentUser.getSkills());
-        return "redirect:/";
+        return "redirect:/users/profile";
     }
 
+    @GetMapping("skills/delete/{userId}")
+    public String displayDeleteSkillForm(Model model){
+        model.addAttribute("skills", skillsRepository.findAll());
+        return "skills/delete";
+    }
+
+    @PostMapping("skills/delete/{userId}")
+    public String processDeleteSkillForm(@RequestParam (required = false) int [] skillIds, HttpSession session, Model model, @PathVariable Integer userId){
+        Optional<User> result = userRepository.findById(userId);
+        User currentUser = result.get();
+        if(skillIds != null){
+            for(int id : skillIds){
+                skillsRepository.deleteById(id);
+            }
+        }
+        userRepository.save(currentUser);
+        model.addAttribute("skills", currentUser.getSkills());
+        return "redirect:/users/profile";
+    }
 }
+
+
 
