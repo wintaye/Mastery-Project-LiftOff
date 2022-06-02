@@ -5,15 +5,15 @@
     --title-font: "Urbanist", sans-serif;
     --body-font: "Open Sans", sans-serif;
     --bg-color: #FFFFFF;
-    --bg-100: #EAE8ED;
-    --bg-200: #B0A8B9;
+    --bg-darker-100: #EAE8ED;
+    --bg-darker-200: #B0A8B9;
     --main-color: #4B4453;
-    --main-100: #3D3743;
-    --main-200: #29252D;
+    --main-darker-100: #3D3743;
+    --main-darker-200: #29252D;
     --accent-color: #FF8066;
-    --accent-100: #FF6647;
-    --accent-200: #FF5533;
-    --error-color: #FF8066;
+    --accent-darker-100: #FF6647;
+    --accent-darker-200: #FF5533;
+    --error-color: #FF5533;
 
 }
 
@@ -22,10 +22,42 @@
 }
 
 html {
-    font-family: --body-font;
+    font-family: var(--body-font);
 }
 
 body {
+}
+
+.navbar-dark {
+    background: var(--main-darker-200);
+}
+
+.navbar-dark.nav-item, .navbar-dark.navbar-brand{
+    color: var(--bg-color);
+}
+
+.navbar-dark.nav-item:hover {
+    background: var(--main-darker-100);
+    color: var(--accent-darker-100);
+}
+
+.rounded-circle {
+    border: 2px solid var(--accent-darker-100);
+}
+
+.footer {
+    padding-top: 40px;
+    background: var(--main-darker-200);
+    color: var(--bg-color);
+
+}
+
+.footer-title {
+    color: var(--accent-color);
+}
+
+i {
+    color: var(--bg-color);
 }
 
 section {
@@ -43,7 +75,22 @@ section {
     object-fit: cover;
 }
 
+.login-form, .register-form {
+    text-align: center;
+    margin-top: 75px;
+    padding: 80px 50px;
+    border: 2px solid var(--accent-color);
+    border-radius: 15px;
+}
+
+hr {
+    background-color: var(--accent-color);
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited{
+    background-color: var(--accent-darker-200) !important;
+    border: 0px;
+}
 
 .error {
   color: var(--error-color);
-}

@@ -1,51 +1,75 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-
 <head th:replace="fragments :: head"></head>
+<body class="d-flex flex-column min-vh-100">
 
-<header th:replace="fragments :: header"></header>
+<div th:replace="fragments :: navbar"></div>
 
-<body class="container">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 register-form">
+            <div class="col-lg-12">
+                <h2 class="mb-2">Register</h2>
+                <hr class="mb-4"/>
+                <form method="post" class="form">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" th:field="${userProfile.firstName}" placeholder="First Name">
+                            <p class="error" th:errors="${userProfile.firstName}"></p>
+                        </div>
 
-    <form method="post">
-        <label>First Name
-            <input type="text" th:field="${userProfile.firstName}" />
-        </label>
-        <p class="errors" th:errors="${userProfile.firstName}"></p>
-        <label>Last Name
-            <input type="text" th:field="${userProfile.lastName}" />
-        </label>
-        <p class="errors" th:errors="${userProfile.lastName}"></p>
-        <label>E-mail
-            <input type="text" th:field="${userProfile.email}" />
-        </label>
-        <p class="errors" th:errors="${userProfile.email}"></p>
-        <label>Phone Number
-            <input type="text" th:field="${userProfile.phoneNumber}" />
-        </label>
-        <p class="errors" th:errors="${userProfile.phoneNumber}"></p>
-        <label>Zip Code
-            <input type="text" th:field="${userProfile.zipCode}" />
-        </label>
-        <p class="errors" th:errors="${userProfile.zipCode}"></p>
-        <label>Username
-            <input type="text" th:field="${registerFormDTO.username}" />
-        </label>
-        <p class="errors" th:errors="${registerFormDTO.username}"></p>
-        <label>Password
-            <input type="password" th:field="${registerFormDTO.password}" />
-        </label>
-        <p class="errors" th:errors="${registerFormDTO.password}"></p>
-        <label>Verify Password
-            <input type="password" th:field="${registerFormDTO.verifyPassword}" />
-        </label>
-        <p class="errors" th:errors="${registerFormDTO.verifyPassword}"></p>
-        <input type="submit" value="REGISTER" class="submit">
-    </form>
-    <p>Already have An account? <a href="/login">Log In here.</a></p>
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" th:field="${userProfile.lastName}" placeholder="Last Name">
+                            <p class="error" th:errors="${userProfile.lastName}"></p>
+                        </div>
+                    </div>
 
-</main>
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <input type="text" class="form-control" th:field="${userProfile.phoneNumber}" placeholder="Phone Number">
+                            <p class="error" th:errors="${userProfile.phoneNumber}"></p>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <input type="text" class="form-control" th:field="${userProfile.zipCode}" placeholder="Zip Code">
+                            <p class="error" th:errors="${userProfile.zipCode}"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <input type="text" class="form-control" th:field="${registerFormDTO.username}" placeholder="Username">
+                        <p class="error" th:errors="${registerFormDTO.username}"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" th:field="${userProfile.email}" placeholder="Email">
+                        <p class="error" th:errors="${userProfile.email}"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control" th:field="${registerFormDTO.password}" placeholder="Password">
+                        <p class="error" th:errors="${registerFormDTO.password}"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control" th:field="${registerFormDTO.verifyPassword}" placeholder="Verify Password">
+                        <p class="error" th:errors="${registerFormDTO.verifyPassword}"></p>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary btn-block form-group mt-4" value="Sign Up" />
+                </form>
+
+                <p>Already have an account? <a href="/login">Log In</a></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments :: footer"></div>
+
+
 </body>
 </html>
-
-

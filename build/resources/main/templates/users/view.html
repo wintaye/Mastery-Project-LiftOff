@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
-    <div th:replace="fragments :: head"></div>
-</head>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
 <body>
-<header th:replace="fragments :: header"></header>
 
-</body>
+<div th:replace="fragments :: navbar"></div>
 
 <main>
     <h1 th:text="${user.userProfile.firstName} +' '+ ${user.userProfile.lastName}"></h1>
@@ -19,9 +15,6 @@
     <form class="noPaddingLeft" th:action="@{/users/edit/{id}(id=${user.id})}" method="get">
         <button class="submit">Edit User</button>
     </form>
-<div>
-    <li class="nav-link"><a th:href="@{/skills/create/{id}(id=${user.id})}">Add New Skill</a></li>
-</div>
 
 </main>
 </body>

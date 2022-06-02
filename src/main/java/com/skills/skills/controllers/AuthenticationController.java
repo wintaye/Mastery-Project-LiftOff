@@ -79,7 +79,8 @@ public class AuthenticationController {
         skills = user.getSkills();
 
         skills.forEach(skill -> {
-            if (skill.tag.getTagName() == tagId) {
+            Tag skillTag = skill.tagName;
+            if (skill.getTagId(skillTag) == tagId) {
                 filteredSkills.add(skill);
             }
         });

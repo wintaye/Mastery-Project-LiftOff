@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<div th:replace="fragments :: navbar"></div>
+
+<main>
+
+    <form method="post">
+
+
+        <th:block th:each="skill : ${skills}">
+            <div class="form-group">
+                <label>
+                    <span th:text="${skill.name}"></span><br>
+                    <input type="checkbox" name="skillIds" th:value="${skill.id}" class="form-control">
+                </label>
+            </div>
+        </th:block>
+        <input type="submit" value="Delete" class="btn btn-danger">
+    </form>
+    <div>
+        <li class="nav-link"><a th:href="@{/users/profile}">Back to Profile</a></li>
+    </div>
+</main>
+</body>
+</html>
