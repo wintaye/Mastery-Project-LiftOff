@@ -1,7 +1,9 @@
 //package com.skills.skills.models;
 //
+//
 //import com.skills.skills.data.SkillsCategoryRepository;
 //import com.skills.skills.data.TagRepository;
+//import com.skills.skills.models.skill.SkillsCategory;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 //import org.springframework.boot.CommandLineRunner;
@@ -14,21 +16,13 @@
 //    private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 //
 //    @Bean
-//    CommandLineRunner initDatabase(TagRepository repository) {
+//    CommandLineRunner initDatabase(SkillsCategoryRepository repository) {
 //
 //        return args -> {
-//            log.info("Preloading " + repository.save(new Tag("Skills I Have")));
-//            log.info("Preloading " + repository.save(new Tag("Skills I Want")));
-//            log.info("Preloading " + repository.save(new Tag("Skills I Can Share")));
-////            log.info("Preloading " + repository.save(new SkillsCategory("Dance")));
-////            log.info("Preloading " + repository.save(new SkillsCategory("Visual Arts")));
-////            log.info("Preloading " + repository.save(new SkillsCategory("Performing Arts")));
-////            log.info("Preloading " + repository.save(new SkillsCategory("Woodworking")));
-////            log.info("Preloading " + repository.save(new SkillsCategory("Language")));
-////            log.info("Preloading " + repository.save(new SkillsCategory("Music")));
-////            log.info("Preloading " + repository.save(new SkillsCategory("Coding")));
-////            log.info("Preloading " + repository.save(new SkillsCategory("Leisure Sports")));
-////            log.info("Preloading " + repository.save(new SkillsCategory("Home Repair")));
-////        };
-////    }
+//
+//            log.info("Preloading " + repository.save(new SkillsCategory("Charity/Non-Profit")));
+//            log.info("Preloading " + repository.save(new SkillsCategory("Ceramics")));
+//
+//        };
+//    }
 //}

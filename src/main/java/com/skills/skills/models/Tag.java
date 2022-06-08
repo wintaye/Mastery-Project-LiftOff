@@ -1,5 +1,7 @@
 package com.skills.skills.models;
 
+import com.skills.skills.models.skill.Skill;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;

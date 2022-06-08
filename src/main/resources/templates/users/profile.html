@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <div th:replace="fragments :: navbar"></div>
-
 <main>
-    <div class="w3-container">
     <p>Welcome, <span th:text="${user.username}"></span></p>
-    </div>
 
-    <li class="nav-link"><a th:href="@{/users/view/{id}(id=${user.id})}">User Info</a></li>
-
-    <div>
+    <li class="nav-link"><a th:href="@{/users/personal_info/{id}(id=${user.id})}">Personal Information</a></li>
+    <li class="nav-link"><a th:href="@{/users/profile/inbox}">Inbox</a></li>
     <form method="post">
         <div class="form-group">
             <label>Filter By:
@@ -28,7 +24,32 @@
             <input type="submit" value="Filter" class="btn btn-success">
         </div>
     </form>
+
+    <div>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>Event</th>
+                <th>Event Category</th>
+                <th>Contact Email</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tr th:each="event : ${events}">
+                <td><a th:href="@{/events/edit/id={id}&event={eventId}(id=${user.id}, eventId=${event.id})}" th:text="${event.name}"></a></td>
+                <td th:text="${event.catName.catName}"></a></td>
+                <td th:text="${event.contactEmail}"></a></td>
+                <td th:text="${event.description}"></a></td>
+            </tr>
+        </table>
     </div>
+
+    <div>
+        <li class="nav-link"><a th:href="@{/events/create/{id}(id=${user.id})}">Add Event</a></li>
+<!---->
+        <li class="nav-link"><a th:href="@{/events/delete/{id}(id=${user.id})}">Remove Event</a></li>
+    </div>
+
     <div>
         <table class="table table-striped">
             <thead class="thead-dark">
@@ -45,12 +66,13 @@
             </tr>
         </table>
     </div>
+
     <div>
         <li class="nav-link"><a th:href="@{/skills/create/{id}(id=${user.id})}">Add Skill</a></li>
         <li class="nav-link"><a th:href="@{/skills/delete/{id}(id=${user.id})}">Remove Skill</a></li>
     </div>
-</main>
 
+</main>
 </body>
 </html>
 

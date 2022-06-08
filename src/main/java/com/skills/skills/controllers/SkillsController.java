@@ -4,9 +4,9 @@ import com.skills.skills.data.SkillsCategoryRepository;
 import com.skills.skills.data.SkillsRepository;
 import com.skills.skills.data.TagRepository;
 import com.skills.skills.data.UserRepository;
-import com.skills.skills.models.Skill;
+import com.skills.skills.models.skill.Skill;
 import com.skills.skills.models.Tag;
-import com.skills.skills.models.User;
+import com.skills.skills.models.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("skills")
 public class SkillsController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class SkillsController {
 
 
     //responds to request at skills/create?userId=##
-    @GetMapping("skills/create/{userId}")
+    @GetMapping("create/{userId}")
     public String createNewSkill (@PathVariable Integer userId, Model model, HttpSession session){
         User user = getUserFormSession(session);
         model.addAttribute("user", user);
@@ -60,12 +60,13 @@ public class SkillsController {
         User currentUser = result.get();
         model.addAttribute("title", "Create New Skill");
         model.addAttribute(new Skill());
+        model.addAttribute(new Tag());
         model.addAttribute("tags", tagRepository.findAll());
         model.addAttribute("categories", skillsCategoryRepository.findAll());
         return  "skills/create";
     }
 
-    @PostMapping("skills/create/{userId}")
+    @PostMapping("create/{userId}")
     public String processNewSkill(@PathVariable Integer userId, HttpSession session, Model model, @ModelAttribute @Valid Skill newSkill, Errors errors) {
         User user = getUserFormSession(session);
         model.addAttribute("user", user);
@@ -81,7 +82,7 @@ public class SkillsController {
         return "redirect:/users/profile";
     }
 
-    @GetMapping("skills/delete/{userId}")
+    @GetMapping("delete/{userId}")
     public String displayDeleteSkillForm(Model model, HttpSession session){
         User user = getUserFormSession(session);
         model.addAttribute("user", user);
@@ -89,7 +90,7 @@ public class SkillsController {
         return "skills/delete";
     }
 
-    @PostMapping("skills/delete/{userId}")
+    @PostMapping("delete/{userId}")
     public String processDeleteSkillForm(@RequestParam (required = false) int [] skillIds, HttpSession session, Model model, @PathVariable Integer userId){
         User user = getUserFormSession(session);
         model.addAttribute("user", user);

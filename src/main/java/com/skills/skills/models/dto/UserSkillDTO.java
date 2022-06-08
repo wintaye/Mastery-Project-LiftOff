@@ -1,7 +1,7 @@
 package com.skills.skills.models.dto;
 
-import com.skills.skills.models.Skill;
-import com.skills.skills.models.User;
+import com.skills.skills.models.skill.Skill;
+import com.skills.skills.models.user.User;
 
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;

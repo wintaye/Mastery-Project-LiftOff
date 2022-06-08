@@ -1,12 +1,12 @@
 package com.skills.skills.controllers;
 
-import com.skills.skills.data.SkillsCategoryRepository;
-import com.skills.skills.data.SkillsRepository;
-import com.skills.skills.data.TagRepository;
-import com.skills.skills.data.UserRepository;
-import com.skills.skills.models.*;
+import com.skills.skills.data.*;
+import com.skills.skills.models.Tag;
 import com.skills.skills.models.dto.LoginFormDTO;
 import com.skills.skills.models.dto.RegisterFormDTO;
+import com.skills.skills.models.skill.Skill;
+import com.skills.skills.models.user.User;
+import com.skills.skills.models.user.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +35,9 @@ public class AuthenticationController {
     public TagRepository tagRepository;
 
     @Autowired
+    private EventRepository eventRepository;
+
+    @Autowired
     public SkillsCategoryRepository skillsCategoryRepository;
 
     private static final String userSessionKey = "user";
@@ -58,12 +61,20 @@ public class AuthenticationController {
         session.setAttribute(userSessionKey, user.getId());
 
     }
+//
+//    @GetMapping
+//    public String displayPageAfterLogin(HttpSession session, Model model) {
+//        User user = getUserFormSession(session);
+//        model.addAttribute("user", user);
+//        return "index";
+//    }
 
     @GetMapping("/users/profile")
     public String displayPageAfterLogin (HttpSession session, Model model) {
         User user = getUserFormSession(session);
         model.addAttribute("user", user);
         model.addAttribute("skills", user.getSkills());
+        model.addAttribute("events", user.getEvents());
         model.addAttribute(new Skill());
         model.addAttribute(new Tag());
         model.addAttribute("tags", tagRepository.findAll());
@@ -181,6 +192,7 @@ public class AuthenticationController {
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
+
         request.getSession().invalidate();
         return "redirect:/login";
     }

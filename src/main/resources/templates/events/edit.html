@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <div th:replace="fragments :: head"></div>
+
+</head>
+<body class="d-flex flex-column min-vh-100">
+<div th:replace="fragments :: navbar"></div>
+<main>
+    <form method="post" th:object="${event}">
+
+        <label>Name: <input type="text" th:field="${event.name}"></label>
+        <p class="errors" th:errors="${event.name}"></p><br>
+        <label>Description: <input type="text" th:field="${event.description}"></label>
+        <p class="errors" th:errors="${event.description}"></p><br>
+        <label>Contact Email: <input type="text" th:field="${event.contactEmail}"></label>
+        <p class="errors" th:errors="${event.contactEmail}"></p><br>
+        <div class="form-group">
+            <label>Event Skill Category
+                <select th:field="${event.catName}">
+                    <option th:each="cat : ${cats}"
+                            th:value="${cat.id}"
+                            th:text="${cat.catName}"
+                    ></option>
+                </select>
+            </label>
+        </div>
+        <input type="submit" value="Update Event" class="btn btn-success">
+    </form>
+</main>
+
+</body>
+</html>

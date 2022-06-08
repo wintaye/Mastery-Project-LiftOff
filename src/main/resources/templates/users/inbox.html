@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="d-flex flex-column min-vh-100">
+
+<div th:replace="fragments :: navbar"></div>
+
+<div class="container body-content">
+    <table class="control-form" th:each="message:${messages}">
+        <tr>
+            <th>Sender:</th>
+            <th>Time:</th>
+            <th>Subject:</th>
+            <th>Message:</th>
+        </tr>
+        <tr>
+            <td th:text="${message.sender}"></td>
+            <td th:text="${message.timestamp}"></td>
+            <td th:text="${message.messageSubject}"></td>
+            <td th:text="${message.messageBody}"></td>
+        </tr>
+    </table>
+</div>
+
+
+
+</body>
+</html>
+
