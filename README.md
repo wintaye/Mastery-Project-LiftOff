@@ -1,32 +1,53 @@
-## LiftOff
+## People Skills
 ---
 ### Overview
-We would like to create an app that would allow users to both learn and teach their skills with other users. If they have a skill they're knowledgeable in, they can opt to teach it to other users. If they have a skill that they're interested in learning, they can interact with other users to set up a meeting to learn the skill the other user knows. The users will be able to share both their availability and location, so they can set up a time and place to meet up and share their skills and knowledge with one another.
+Allows users to share skills they have and search for skills other users have to offer. Users can also create classes around specific skills they want to share allowing others a free opportunity to learn something new. 
 
 ---
 ### Features
-- As a user, I need to sign up.
-- As a user, I want to find someone who has a skill.
-- As a user, I want to share my skills with others.
-- As a user, I want to share my availability and location.
+Users can sign up, log in, edit profile info
+Users can CRUD skills and classes in their profile
+Users can search for other users, skills, and events by keyword
+Users can message one another 
+
+
 
 ---
 ### Technologies
-- HTML
-- CSS
-- Java
-- Thymeleaf
-- Hibernate
-- MySQL
-- Spring Boot
+
+Java
+Spring Boot, Spring Data
+Thymeleaf
+MySQL 
+Bootstrap, CSS, HTML, Javascript
+
 
 ---
-### Have To Learn
-- Using API to allow user login with Google/Facebook
-- How to allow user content uploads
+### What We Learned
+-Extensive Bootstrap styling and Thymeleaf templating incorporated into app
+-Project workflow (collaborating, setting goals, editing, tools like Trello) 
+-Github workflow (branching, merging pull requests, code review)
+-Filtering and sorting methodology
+-Wireframing, Kanban/Agile Methods
+-Aggregation + encapsulation using DTOs
+
 
 ---
-### Project Tracker
-- https://trello.com/b/lak5fpZP/teamskillshare
+### What's Next
+
+-Adding community community message board/forum 
+-Incorporating Google Calendar API for events
+-Incorporating Firebase REST API to connect front + back end
+-Spring Security
+-Ajax for asynchronous updates
+-Angular front-end framework
+
+
 ---
 ### Authors
+Wintaye Gebru @wintaye
+Michael Allen @shokoladber
+Madison Curry @curriated 
+Fidel Rahmeto @frahmeto
+
+
