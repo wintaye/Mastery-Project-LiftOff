@@ -102,5 +102,25 @@ public class UserController {
         return "redirect:/users/personal_info/" + userId;
     }
 
+    //user search results
+    @GetMapping("user_details/{userId}")
+    public String viewUserSearchResult(@PathVariable int userId, HttpSession session, Model model){
+        User currentUser= authenticationController.getUserFormSession(session);
+        Optional<User> searchResult = userRepository.findById(userId);
+        User searchResultUser = searchResult.get();
+
+
+        if(currentUser.getId() == searchResultUser.getId()){
+            return "redirect:/users/profile";
+        }else {
+            model.addAttribute("user", currentUser);
+            model.addAttribute("searchUser", searchResultUser);
+            model.addAttribute("skills", searchResultUser.getSkills());
+            model.addAttribute("events", searchResultUser.getCreatorEvents());
+        }
+
+        return "users/user_details";
+    }
+
 
 }

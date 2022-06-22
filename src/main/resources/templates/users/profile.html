@@ -1,80 +1,124 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="d-flex flex-column min-vh-100">
 
 <div th:replace="fragments :: navbar"></div>
-<main>
-    <p>Welcome, <span th:text="${user.username}"></span></p>
 
-    <li class="nav-link"><a th:href="@{/users/personal_info/{id}(id=${user.id})}">Personal Information</a></li>
-    <li class="nav-link"><a th:href="@{/users/profile/inbox}">Inbox</a></li>
-    <form method="post">
-        <div class="form-group">
-            <label>Filter By:
-                <select th:name="tagId">
-                    <option th:each="tag : ${tags}"
-                            th:value="${tag.getId}"
-                            th:text="${tag.tagName}"
-                    ></option>
-                </select>
-            </label>
+<div class="page-content-flush">
+    <div class="jumbotron jumbotron-fluid h-100 profile-header">
+        <div class="container">
+            <img class="mx-auto d-block rounded-circle mb-4" src="https://images.unsplash.com/photo-1622605831600-27dada003875?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" height="100" width="100">
+            <h3 class="text-center mb-2" th:text="${user.username}">Username</h3>
+            <div class="d-flex flex-row justify-content-center">
+
+                <a th:href="@{/users/edit_personal_info/{id}(id=${user.id})}" class="btn btn-secondary border d-flex align-items-center mr-2"><i class="bi-pencil mr-2"></i>Account Settings</a>
+                <a th:href="@{/users/inbox}" class="btn btn-primary text-white d-flex align-items-center"><i class="bi-envelope"></i></a>
+
+            </div>
         </div>
-        <div class="form-group">
-            <input type="submit" value="Filter" class="btn btn-success">
+
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div>
+
+
+                    <div class="w-100 d-flex flex-row mb-2">
+
+                        <a th:href="@{/events/create/{id}(id=${user.id})}" class="btn btn-primary text-white mr-2"><i class="bi-pencil mr-2"></i>Create Class</a>
+                        <a th:href="@{/events/delete/{id}(id=${user.id})}" class="btn btn-secondary border mr-2"><i class="bi-pencil mr-2"></i>Remove Class</a>
+
+                        <form method="post" class="form-inline ml-auto">
+                            <div class="form-group mr-2">
+                                    <select th:name="tagId" class="custom-select">
+                                        <option value="" hidden>Filter By:</option>
+                                        <option th:each="tag : ${tags}"
+                                                th:value="${tag.getId}"
+                                                th:text="${tag.tagName}"
+                                        ></option>
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Filter" class="btn btn-primary text-white">
+                                <!--            <input type="submit" value="Clear" class="btn btn-success">-->
+                            </div>
+                        </form>
+
+                    </div>
+
+
+                    <div>
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">My Events</th>
+                                <th scope="col">Event Category</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                            </thead>
+
+                            <tr th:each="creatorEvent : ${creatorEvents}">
+                                <td><a th:href="@{/events/edit/id={id}&event={eventId}(id=${user.id}, eventId=${creatorEvent.id})}" th:text="${creatorEvent.name}"></a></td>
+                                <td th:text="${creatorEvent.catName.catName}"></a></td>
+                                <td th:text="${creatorEvent.description}"></a></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Events I'm Attending</th>
+                                <th scope="col">Event Category</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                            </thead>
+                            <tr th:each="guestEvent : ${guestEvents}">
+                              <td><a th:href="@{/events/event_details/id={id}&event={eventId}(id=${user.id}, eventId=${guestEvent.id})}" th:text="${guestEvent.name}"></a></td>
+                                <td th:text="${guestEvent.catName.catName}"></a></td>
+                                <td th:text="${guestEvent.description}"></a></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="w-100 d-flex flex-row mb-2">
+
+                        <a th:href="@{/skills/create/{id}(id=${user.id})}" class="btn btn-primary text-white mr-2"><i class="bi-pencil mr-2"></i>Add Skill</a>
+                        <a th:href="@{/skills/delete/{id}(id=${user.id})}" class="btn btn-secondary border mr-2"><i class="bi-pencil mr-2"></i>Remove Skill</a>
+
+                    </div>
+
+                    <div>
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Skill</th>
+                                <th scope="col">Skill Category</th>
+                                <th scope="col">Tag</th>
+                            </tr>
+                            </thead>
+                            <tr th:each="skill : ${skills}">
+                                <td th:text="${skill.name}"></a></td>
+                                <td th:text="${skill.catName.catName}"></a></td>
+                                <td th:text="${skill.tagName.tagName}"></a></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
         </div>
-    </form>
-
-    <div>
-        <table class="table table-striped">
-            <thead class="thead-dark">
-            <tr>
-                <th>Event</th>
-                <th>Event Category</th>
-                <th>Contact Email</th>
-                <th>Description</th>
-            </tr>
-            </thead>
-            <tr th:each="event : ${events}">
-                <td><a th:href="@{/events/edit/id={id}&event={eventId}(id=${user.id}, eventId=${event.id})}" th:text="${event.name}"></a></td>
-                <td th:text="${event.catName.catName}"></a></td>
-                <td th:text="${event.contactEmail}"></a></td>
-                <td th:text="${event.description}"></a></td>
-            </tr>
-        </table>
     </div>
+</div>
 
-    <div>
-        <li class="nav-link"><a th:href="@{/events/create/{id}(id=${user.id})}">Add Event</a></li>
-<!---->
-        <li class="nav-link"><a th:href="@{/events/delete/{id}(id=${user.id})}">Remove Event</a></li>
-    </div>
+<div th:replace="fragments :: footer"></div>
 
-    <div>
-        <table class="table table-striped">
-            <thead class="thead-dark">
-            <tr>
-                <th>Skill</th>
-                <th>Skill Category</th>
-                <th>Tag</th>
-            </tr>
-            </thead>
-            <tr th:each="skill : ${skills}">
-                <td th:text="${skill.name}"></a></td>
-                <td th:text="${skill.catName.catName}"></a></td>
-                <td th:text="${skill.tagName.tagName}"></a></td>
-            </tr>
-        </table>
-    </div>
-
-    <div>
-        <li class="nav-link"><a th:href="@{/skills/create/{id}(id=${user.id})}">Add Skill</a></li>
-        <li class="nav-link"><a th:href="@{/skills/delete/{id}(id=${user.id})}">Remove Skill</a></li>
-    </div>
-
-</main>
 </body>
 </html>
-
 
 

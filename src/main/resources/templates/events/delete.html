@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="d-flex flex-column min-vh-100">
 
 <div th:replace="fragments :: navbar"></div>
 
-<main>
+<h2>Delete Messages</h2>
 
+<div class="card one-event-post mb-3">
+    <h4 class="card-header event-card-header">Received</h4>
+
+</div>
+<div class="container body-content">
     <form method="post">
 
 
@@ -24,5 +29,8 @@
         <li class="nav-link"><a th:href="@{/users/profile}">Back to Profile</a></li>
     </div>
 </main>
+
+<div th:replace="fragments :: footer"></div>
+
 </body>
 </html>

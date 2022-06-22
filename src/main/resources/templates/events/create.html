@@ -5,43 +5,51 @@
 
 <div th:replace="fragments :: navbar"></div>
 
-<main>
+<div class="page-content">
+    <div class="container">
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-8">
 
-    <form method="post">
-        <div class="form-group">
-            <label>Event Name
-                <input th:field="${event.name}" class="form-control" />
-            </label>
-            <!--        <p class="errors" th:errors="${event.name}"></p>-->
-        </div>
-        <div class="form-group">
-            <label>Details
-                <input th:field="${event.description}" class="form-control" />
-            </label>
-            <!--        <p class="errors" th:errors="${event.name}"></p>-->
-        </div>
-        <div class="form-group">
-            <label>Contact Email
-                <input th:field="${event.contactEmail}" class="form-control" />
-            </label>
-            <!--        <p class="errors" th:errors="${event.name}"></p>-->
-        </div>
-                <div class="form-group">
-                    <label>Event Skill Category
-                        <select th:field="${event.catName}">
-                            <option th:each="cat : ${categories}"
-                                    th:value="${cat.id}"
-                                    th:text="${cat.catName}"
-                            ></option>
-                        </select>
-                    </label>
-                    <!--            <p class="errors" th:errors="${skill.catName}"></p>-->
-                </div>
-        <div>
-            <input type="submit" value="Create" class="btn btn-success">
-        </div>
-    </form>
+                <h4 class="mb-3">New Class</h4>
+                <hr class="mb-4"/>
 
-</main>
+                    <form method="post" th:object="${event}">
+
+                        <div class="form-group">
+                            <input th:field="${event.name}" class="form-control" placeholder="Title">
+                            <p class="errors" th:errors="${event.name}"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea th:field="${event.description}" class="form-control" placeholder="Description" rows="8"></textarea>
+                            <p class="errors" th:errors="${event.description}"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <select th:field="${event.catName}" class="custom-select">
+                                <option value="" hidden>Category</option>
+                                <option th:each="cat : ${categories}"
+                                        th:value="${cat.id}"
+                                        th:text="${cat.catName}"
+                                ></option>
+                            </select>
+                            <p class="errors" th:errors="${event.catName}"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block" type="submit" value="Create">Create Class</button>
+                            <input type="hidden" th:value="${user.id}" name="creatorId" />
+                            <input type="hidden" th:value="${user.userProfile.email}" name="email" />
+                        </div>
+
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments :: footer"></div>
+
 </body>
 </html>

@@ -1,22 +1,66 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+<body class="d-flex flex-column min-vh-100">
 
-<body>
-<main>
-    <form method="post" th:object="${user}">
-        <label>First Name: <input type="text" th:field="${user.firstName}"></label>
-        <p class="errors" th:errors="${user.firstName}"></p><br>
-        <label>Last Name: <input type="text" th:field="${user.lastName}"></label>
-        <p class="errors" th:errors="${user.lastName}"></p><br>
-        <label>Phone Number: <input type="text" th:field="${user.phoneNumber}"></label>
-        <p class="errors" th:errors="${user.phoneNumber}"></p><br>
-        <label>Email: <input type="text" th:field="${user.email}"></label>
-        <p class="errors" th:errors="${user.email}"></p><br>
-        <label>Zip Code: <input type="text" th:field="${user.ZipCode}"></label>
-        <p class="errors" th:errors="${user.zipCode}"></p><br>
-        <input type="submit" value="Save Changes">
-    </form>
-</main>
+<div th:replace="fragments :: navbar"></div>
+
+<div class="page-content">
+
+    <div class="container border rounded p-5">
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-12 float-left">
+                <h5>Edit Information</h5>
+
+            </div>
+
+            <div class="col-lg-8 col-md-12 float-right border-left">
+
+                <form method="post" th:object="${user}">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="firstNameEdit">First Name</label>
+                            <input class="form-control" type="text" th:field="${user.firstName}" id="firstNameEdit">
+                            <p class="errors" th:errors="${user.firstName}"></p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="lastNameEdit">Last Name</label>
+                            <input class="form-control" type="text" th:field="${user.lastName}" id="lastNameEdit">
+                            <p class="errors" th:errors="${user.lastName}"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailEdit">Email</label>
+                        <input class="form-control" type="text" th:field="${user.email}" id="emailEdit">
+                        <p class="errors" th:errors="${user.email}"></p>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <label for="phoneNumEdit">Phone Number</label>
+                            <input class="form-control" type="text" th:field="${user.phoneNumber}" id="phoneNumEdit">
+                            <p class="errors" th:errors="${user.phoneNumber}"></p>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="zipCodeEdit">Zip Code</label>
+                            <input class="form-control" type="text" th:field="${user.ZipCode}" id="zipCodeEdit">
+                            <p class="errors" th:errors="${user.zipCode}"></p>
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary btn-block form-group mt-4" value="Save Changes" />
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments :: footer"></div>
+
 </body>
 </html>

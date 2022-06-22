@@ -5,6 +5,7 @@ import com.skills.skills.models.Tag;
 import com.skills.skills.models.dto.LoginFormDTO;
 import com.skills.skills.models.dto.RegisterFormDTO;
 import com.skills.skills.models.skill.Skill;
+import com.skills.skills.models.skill.SkillsCategory;
 import com.skills.skills.models.user.User;
 import com.skills.skills.models.user.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,20 +62,14 @@ public class AuthenticationController {
         session.setAttribute(userSessionKey, user.getId());
 
     }
-//
-//    @GetMapping
-//    public String displayPageAfterLogin(HttpSession session, Model model) {
-//        User user = getUserFormSession(session);
-//        model.addAttribute("user", user);
-//        return "index";
-//    }
 
     @GetMapping("/users/profile")
     public String displayPageAfterLogin (HttpSession session, Model model) {
         User user = getUserFormSession(session);
         model.addAttribute("user", user);
         model.addAttribute("skills", user.getSkills());
-        model.addAttribute("events", user.getEvents());
+        model.addAttribute("creatorEvents", user.getCreatorEvents());
+        model.addAttribute("guestEvents", user.getGuestEvents());
         model.addAttribute(new Skill());
         model.addAttribute(new Tag());
         model.addAttribute("tags", tagRepository.findAll());
@@ -86,8 +81,8 @@ public class AuthenticationController {
         User user = getUserFormSession(session);
 
         List<Skill> skills;
-        List<Skill> filteredSkills = new ArrayList<>();
         skills = user.getSkills();
+        List<Skill> filteredSkills = new ArrayList<>();
 
         skills.forEach(skill -> {
             Tag skillTag = skill.tagName;
@@ -99,6 +94,8 @@ public class AuthenticationController {
         model.addAttribute("skills", filteredSkills);
         model.addAttribute(new Skill());
         model.addAttribute("tags", tagRepository.findAll());
+        model.addAttribute("creatorEvents", user.getCreatorEvents());
+        model.addAttribute("guestEvents", user.getGuestEvents());
         return "users/profile";
     }
 
@@ -142,17 +139,12 @@ public class AuthenticationController {
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), userProfile);
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
-
-        //return "redirect:login";
-        //return "users/index";
-        //return "register_success";
         return "redirect:/users/profile";
 
     }
 
     @GetMapping("login")
     public String displayLoginForm(Model model) {
-
         model.addAttribute(new LoginFormDTO());
         model.addAttribute("title", "LOG IN");
         return "login";
@@ -162,12 +154,6 @@ public class AuthenticationController {
     public String processLoginForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
                                    Errors errors, HttpServletRequest request,
                                    Model model) {
-
-
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "LOG IN");
-            return "login";
-        }
 
         User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
 
@@ -187,7 +173,7 @@ public class AuthenticationController {
 
         setUserInSession(request.getSession(), theUser);
 
-        return "redirect:/users/profile";
+        return "redirect:/";
     }
 
     @GetMapping("/logout")

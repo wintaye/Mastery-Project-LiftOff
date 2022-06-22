@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="d-flex flex-column min-vh-100">
+
+<div th:replace="fragments :: navbar"></div>
+
+<div class="page-content">
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-lg-8 col-md-12 float-left home-event-content">
+            <header class="page-header d-flex mb-2">
+                <h2 class="home-class-title">Classes Available</h2>
+
+<!--                <div class="dropdown ml-auto">-->
+<!--                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">-->
+<!--                        Categories-->
+<!--                    </a>-->
+
+<!--                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+<!--                        <a class="dropdown-item" href="#">Action</a>-->
+<!--                        <a class="dropdown-item" href="#">Another action</a>-->
+<!--                        <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+            </header>
+            <hr class="mb-4"/>
+
+            <div class="home-event-pagination overflow-auto">
+
+                <div th:replace="fragments :: event-posts"></div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-md-12 float-right home-sidebar">
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <span th:if="${user}">
+                    <a class="d-flex justify-content-center mb-4" href="/users/profile"><img class="rounded-circle" src="https://images.unsplash.com/photo-1622605831600-27dada003875?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" height="80" width="80"></a>
+                    </span>
+                    <span th:unless="${user}">
+                                            <a class="d-flex justify-content-center mb-4" href="/home"><img class="rounded-circle" src="https://images.unsplash.com/photo-1622605831600-27dada003875?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" height="80" width="80"></a>
+                    </span>
+                    <span th:if="${user}">
+                    <h5 class="text-center" th:text="${user.username}"><a href="/users/profile">Username</a></h5>
+                    </span>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <h5 class="card-header">Want to share your skills?</h5>
+                <div class="card-body">
+                    <p class="card-text">Offer up a class, taught by you, and share your knowledge with others in your community!</p>
+                    <span th:if="${user}">
+                        <a class="btn btn-primary text-white" th:href="@{/events/create/{id}(id=${user.id})}">Create Class</a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div th:replace="fragments :: footer"></div>
+
+</body>
+</html>

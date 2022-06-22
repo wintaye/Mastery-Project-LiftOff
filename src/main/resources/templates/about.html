@@ -1,10 +1,122 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-
 <body class="d-flex flex-column min-vh-100">
 
 <div th:replace="fragments :: navbar"></div>
+
+<div class="page-content">
+    <div class="mt-5">
+        <div class="container">
+            <section class="about-section">
+                <h1 class="text-center">About</h1>
+                <p>
+                    When our team got together to discuss making an application, we noticed that we all had the similar goal of wanting to create a way for people to share knowledge with one another. Through talking, we determined that it would be a community-focused knowledge sharing website. Users would be able to share what they know, and learn from others in their area. Our team was inspired to create something that would strengthen bonds within a community through sharing knowledge with one another, and People Skills was born!
+                </p>
+            </section>
+
+            <section class="about-team">
+                <div class="container">
+                    <h1 class="text-center">Meet Our Team</h1>
+                    <div class="row team-members-all">
+
+    <!--start of team member - wintaye-->
+                            <div class="team-member col-md-3">
+                                <img src="https://i.imgur.com/q3qUIh2.jpg" class="img-fluid team-image mb-3" alt="Wintaye headshot">
+                                <div class="team-member-info">
+                                    <h3>Wintaye</h3>
+                                    <h6 class="text-muted">Developer</h6>
+                                </div>
+                                <div class="team-member-description">
+                                    <p>A problem-solver and coding enthusiast, I thrive on designing and implementing creatively efficient solutions and optimizing processes wherever possible. I am always learning, growing, and deepening my understanding which makes me a powerful addition to any team.</p>
+                                </div>
+                                <div class="team-member-social mt-2 border-top d-flex flex-row justify-content-center">
+                                    <a href="https://github.com/wintaye" class="mt-2 about-social mr-3"><i class="bi-github icon-light-bg"></i></a>
+                                    <a href="https://www.linkedin.com/in/wintaye/" class="mt-2 about-social"><i class="bi-linkedin icon-light-bg"></i></a>
+                                </div>
+                            </div>
+    <!--end of team member - wintaye-->
+
+    <!--start of team member - michael-->
+                            <div class="team-member col-md-3">
+                                <img src="https://i.imgur.com/GByY2J8.jpg" class="img-fluid team-image mb-3" alt="Michael headshot">
+                                <div class="team-member-info">
+                                    <h3>Michael</h3>
+                                    <h6 class="text-muted">Developer</h6>
+                                </div>
+                                <div class="team-member-description">
+                                    <p>In between studying software engineering and taking care of my two baby girls, I love spending time learning Italian, reading history books, and baking sourdough bread.</p>
+                                </div>
+                                <div class="team-member-social mt-2 border-top d-flex flex-row justify-content-center">
+                                    <a href="https://github.com/shokoladber" class="mt-2 about-social mr-3"><i class="bi-github icon-light-bg"></i></a>
+                                    <a href="https://www.linkedin.com/in/michael-allen-3aa1795b/" class="mt-2 about-social"><i class="bi-linkedin icon-light-bg"></i></a>
+                                </div>
+                            </div>
+    <!--end of team member - michael-->
+
+    <!--start of team member - madison-->
+                            <div class="team-member col-md-3">
+                                <img src="https://i.imgur.com/iybJzKp.jpg" class="img-fluid team-image mb-3" alt="Madison headshot">
+                                <div class="team-member-info">
+                                    <h3>Madison</h3>
+                                    <h6 class="text-muted">Developer</h6>
+                                </div>
+                                <div class="team-member-description">
+                                    <p>I'm a 3D artist that's always looking for new ways to create, which is how I found myself programming! It's opened the door to a whole new range of possibilities, and I look forward to constantly learning and pushing the connection of art + technology.</p>
+                                </div>
+                                <div class="team-member-social mt-2 border-top d-flex flex-row justify-content-center">
+                                    <a href="https://github.com/curriated" class="mt-2 about-social mr-3"><i class="bi-github icon-light-bg"></i></a>
+                                    <a href="https://www.linkedin.com/in/madcurry/" class="mt-2 about-social"><i class="bi-linkedin icon-light-bg"></i></a>
+                                </div>
+                            </div>
+    <!--end of team member - madison-->
+
+    <!--start of team member - fidel-->
+                                <div class="team-member col-md-3">
+                                    <img src="https://i.imgur.com/Fb0Oebc.jpg" class="img-fluid team-image mb-3" alt="Fidel headshot">
+                                    <div class="team-member-info">
+                                        <h3>Fidel</h3>
+                                        <h6 class="text-muted">Developer</h6>
+                                    </div>
+                                    <div class="team-member-description">
+                                        <p>I recently finished LC101 and ready to have my first job as a software developer. I am a lifelong learner, and an incredibly hard worker!!!!</p>
+                                    </div>
+                                    <div class="team-member-social mt-2 border-top d-flex flex-row justify-content-center">
+                                        <a href="https://github.com/frahmeto" class="mt-2 about-social mr-3"><i class="bi-github icon-light-bg"></i></a>
+                                        <a href="https://www.linkedin.com/in/fidelrahmeto" class="mt-2 about-social"><i class="bi-linkedin icon-light-bg"></i></a>
+                                    </div>
+                                </div>
+    <!--end of team member - fidel-->
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-thanks">
+                <h1 class="text-center">Thanks To</h1>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-7 float-left">
+                            <h3>LaunchCode</h3>
+                            <p>LaunchCode was founded in 2013 to help people with nontraditional backgrounds find fulfilling, upwardly-mobile careers, and to help companies find skilled, new tech talent from all backgrounds and walks of life. Each of our members went through LaunchCode's LC101 course to learn software engineering. This project was also created through LaunchCode's Liftoff program which gave us the knowledge and resources to be able to make this website. We are incredibly grateful to LaunchCode and their instructors for all they have provided for us. </p>
+
+                        </div>
+
+                        <div class="col-md-4 float-right">
+                            <img src=https://i.imgur.com/eTA2RbU.png class="img-fluid mt-5" alt="LaunchCode image">
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div th:replace="fragments :: footer"></div>
 
 </body>
 </html>

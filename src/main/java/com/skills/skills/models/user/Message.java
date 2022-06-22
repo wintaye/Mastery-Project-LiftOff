@@ -1,80 +1,87 @@
 package com.skills.skills.models.user;
 
 import com.skills.skills.models.AbstractEntity;
-import jdk.jfr.Timestamp;
-
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Comparator;
+
 
 @Entity
 public class Message extends AbstractEntity {
 
     @NotBlank(message = "Message subject is required")
-    @Size(max = 250, message = "Subject line must be 100 characters or less")
-    private String messageSubject;
+    @Size(max = 250, message = "Subject line must be 250 characters or less")
+    private String subject;
 
     @NotBlank(message = "Message required.")
-    @Size(max = 250, message = "Message must be 1000 characters or less")
-    private String messageBody;
+    @Size(max = 1000, message = "Message must be 1000 characters or less")
+    private String body;
 
-    @Timestamp
     private Timestamp timestamp;
 
-    @NotBlank
+    @NotNull
     private int recipientId;
 
-    @NotBlank
+    @NotNull
     private int senderId;
 
-    public Message(String messageSubject, String messageBody, Timestamp timestamp, int recipientId, int senderId) {
-        this.messageSubject = messageSubject;
-        this.messageBody = messageBody;
+    @NotNull
+    private String senderUsername;
+
+    @NotNull
+    private String recipientUsername;
+
+    public Message(Timestamp timestamp, String subject, String body, int recipientId, String recipientUsername, int senderId, String senderUsername) {
         this.timestamp = timestamp;
+        this.subject = subject;
+        this.body = body;
         this.recipientId = recipientId;
+        this.recipientUsername = recipientUsername;
         this.senderId = senderId;
+        this.senderUsername = senderUsername;
     }
 
     public Message() {}
 
-    public String getMessageSubject() {
-        return messageSubject;
-    }
+    public String getSubject() { return subject; }
 
-    public void setMessageSubject(String messageSubject) {
-        this.messageSubject = messageSubject;
-    }
+    public void setSubject(String subject) { this.subject = subject; }
 
-    public String getMessageBody() {
-        return messageBody;
-    }
+    public String getBody() { return body; }
 
-    public void setMessageBody(String messageBody) {
-        this.messageBody = messageBody;
-    }
+    public void setBody(String body) { this.body = body; }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
+    public Timestamp getTimestamp() { return timestamp; }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
-    }
+    public void setTimestamp (Timestamp timestamp) { this.timestamp = timestamp; }
 
-    public int getRecipient() {
-        return recipientId;
-    }
+    public int getRecipient() { return recipientId; }
 
-    public void setRecipient(User recipient) {
-        this.recipientId = recipient.getId();
-    }
+    public void setRecipient(User recipient) { this.recipientId = recipient.getId(); }
 
-    public int getSender() {
-        return senderId;
-    }
+    public int getSender() { return senderId; }
 
-    public void setSender(User sender) {
-        this.senderId = sender.getId();
-    }
+    public void setSender(User sender) { this.senderId = sender.getId(); }
+
+    public String getSenderUsername(){ return senderUsername; }
+
+    public void setSenderUsername (String senderUsername){ this.senderUsername = senderUsername; }
+
+    public String getRecipientUsername() { return recipientUsername; }
+
+    public void setRecipientUsername(String recipientUsername) { this.recipientUsername = recipientUsername; }
+
+    public static Comparator<Message> compareByTimeStamp = new Comparator<Message>() {
+        @Override
+        public int compare(Message o1, Message o2) {
+            return o1.timestamp.compareTo(o2.timestamp);
+        }
+    };
+
 }
+

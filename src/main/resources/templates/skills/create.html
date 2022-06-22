@@ -1,45 +1,61 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <div th:replace="fragments :: navbar"></div>
 
 <main>
 
-    <form method="post">
-       <div class="form-group">
-        <label>Skill Name
-            <input th:field="${skill.name}" class="form-control" />
-        </label>
-<!--        <p class="errors" th:errors="${skill.name}"></p>-->
-       </div>
-        <div class="form-group">
-        <label>Skill Category
-            <select th:field="${skill.catName}">
-                <option th:each="cat : ${categories}"
-                        th:value="${cat.id}"
-                        th:text="${cat.catName}"
-                ></option>
-            </select>
-        </label>
-<!--            <p class="errors" th:errors="${skill.catName}"></p>-->
+    <div class="container">
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-6">
+
+
+                <h4 class="mb-3">New Skill</h4>
+                <hr class="mb-4"/>
+
+                <form method="post" th:object="${skill}">
+
+                    <div class="form-group">
+                        <input th:field="${skill.name}" class="form-control" placeholder="Skill">
+                        <p class="errors" th:errors="${skill.name}"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <select th:field="${skill.catName}" class="custom-select">
+                            <option value="" hidden>Category</option>
+                            <option th:each="cat : ${categories}"
+                                    th:value="${cat.id}"
+                                    th:text="${cat.catName}"
+                            ></option>
+                        </select>
+                        <p class="errors" th:errors="${skill.catName}"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <select th:field="${skill.tagName}" class="custom-select">
+                            <option value="" hidden>Tag</option>
+                            <option th:each="tag : ${tags}"
+                                    th:value="${tag.id}"
+                                    th:text="${tag.tagName}"
+                            ></option>
+                        </select>
+                        <p class="errors" th:errors="${skill.tagName}"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit" value="Create">Create Skill</button>
+                    </div>
+
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Skill Tag
-            <select th:field="${skill.tagName}">
-                <option th:each="tag : ${tags}"
-                        th:value="${tag.id}"
-                        th:text="${tag.tagName}"
-                ></option>
-            </select>
-            </label>
-        </div>
-        <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-success">
-        </div>
-    </form>
+    </div>
 
 </main>
+
+<div th:replace="fragments :: footer"></div>
+
 </body>
 </html>
