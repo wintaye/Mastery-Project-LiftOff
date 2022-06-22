@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="d-flex flex-column min-vh-100">
+
+<div th:replace="fragments :: navbar"></div>
+
+<main>
+    <p><h2><span th:text="${searchUser.username}"></span>'s Profile</h2></p>
+    <table>
+        <tr th:each="skill : ${skills}">
+            <td>
+                <p>
+                    Skill Name:
+                    <a th:href="@{/skills/skill_details/id={id}&skill={skillId}(id=${user.id}, skillId=${skill.id})}" th:text="${skill.name}"></a>
+                </p>
+            </td>
+        </tr>
+        <tr th:each="event : ${events}">
+            <td>
+                <p>
+                    Event Name:
+                    <a th:href="@{/events/event_details/id={id}&event={eventId}(id=${searchUser.id}, eventId=${event.id})}" th:text="${event.name}"></a>
+                    Event Description:
+                    <a th:href="@{/events/event_details/id={id}&event={eventId}(id=${searchUser.id}, eventId=${event.id})}" th:text="${event.description}"></a>
+                </p>
+
+            </td>
+        </tr>
+    </table>
+
+</main>
+
+<div th:replace="fragments :: footer"></div>
+
+</body>
+</html>

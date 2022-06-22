@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="d-flex flex-column min-vh-100">
+
+<div th:replace="fragments :: navbar"></div>
+
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+    <!--    <h1 th:text="${#strings.(title)}"></h1>-->
+
+                <form th:action="@{/search/results}" method = "post">
+                    <!--        <form th:action="">-->
+                    <h2>Search by:</h2>
+
+                    <p>
+                            <span th:each="column : ${columns}">
+                                <input
+                                        type="radio"
+                                        name="searchType"
+                                        th:id="${column.key}"
+                                        th:value="${column.key}"
+                                        th:checked="${column.key == 'all'}"/>
+                                <label th:for="${column.key}" th:text="${column.value}"></label>
+                            </span>
+                    </p>
+
+                    <div class="input-group w-25">
+                        <input class="form-control rounded-pill py-2 pr-5 mr-1 bg-transparent" type="text" placeholder= "Search" name="searchTerm" id= "searchTerm">
+                        <div class="input-group-append">
+                            <button class="btn btn-link" type="submit"><i class="bi-search icon-light-bg"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!--        <p>-->
+                    <!--            <label for="searchTerm">Keyword: </label>-->
+                    <!--            <input type="text" name="searchTerm" id="searchTerm">-->
+                    <!--        </p>-->
+
+                    <!--        <input type="submit" value="Search" />-->
+
+                </form>
+
+
+                <hr />
+
+
+                <table class="user-listing">
+                    <tr th:each="user : ${users}">
+
+                        <td>
+
+                            <p>
+                                User Name:
+                                <a th:href="@{/users/user_details/{userId}(userId=${user.id})}" th:text="${user.username}"></a>
+                            </p>
+
+                        </td>
+
+                    </tr>
+
+                    <tr th:each="skill : ${skills}">
+                        <td>
+                            <p>
+                                Skill Name:
+                <!--                <a th:href="@{/skills/{id}(id=${skill.id})}" th:text="${skill.name}"></a>-->
+                                <a th:href="@{/skills/skill_details/id={id}&skill={skillId}(id=${user.id}, skillId=${skill.id})}" th:text="${skill.name}"></a>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr th:each="event : ${events}">
+                        <td>
+                            <p>
+                                Event Name:
+                                <a th:href="@{/events/event_details/id={id}&event={eventId}(id=${user.id}, eventId=${event.id})}" th:text="${event.name}"></a>
+                                Event Description:
+                                <a th:href="@{/events/event_details/id={id}&event={eventId}(id=${user.id}, eventId=${event.id})}" th:text="${event.description}"></a>
+                            </p>
+
+                        </td>
+                    </tr>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments :: footer"></div>
+
+</body>
+</html>
+
+<!--            <p>-->
+<!--                User ID:-->
+<!--                <a th:href="@{/users/view/{id}(id=${user.id})}" th:text="${user.id}" ></a>-->
+
+<!--            </p>-->
+<!--            <p>-->
+<!--                User Name:-->
+<!--                <a th:href="@{/users/view/{id}(id=${user.id})}" th:text="${user.username}"></a>-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                User ID:-->
+<!--                <a th:href="@{/users/personal_info/{id}(id=${user.id})}" th:text="${user.id}" ></a>-->
+
+<!--            </p>-->
+
+<!--            <p>-->
+<!--                Skill ID:-->
+<!--                <a th:href="@{/skills/{id}(id=${skill.id})}" th:text="${skill.id}"></a>-->
+<!--            </p>-->
+
+<!--            <p>-->
+<!--                Event ID:-->
+<!--                <a th:href="@{/events/{id}(id=${event.id})}" th:text="${event.id}"></a>-->
+<!--            </p>-->

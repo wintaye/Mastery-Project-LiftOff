@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
-    <div th:replace="fragments :: head"></div>
-
-</head>
+<head th:replace="fragments :: head"></head>
 <body class="d-flex flex-column min-vh-100">
+
 <div th:replace="fragments :: navbar"></div>
+
 <main>
+    <div class="container">
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-8">
+
+                <h4 class="mb-3">Edit Class</h4>
+                <hr class="mb-4"/>
+
     <form method="post" th:object="${event}">
 
-        <label>Name: <input type="text" th:field="${event.name}"></label>
-        <p class="errors" th:errors="${event.name}"></p><br>
-        <label>Description: <input type="text" th:field="${event.description}"></label>
-        <p class="errors" th:errors="${event.description}"></p><br>
-        <label>Contact Email: <input type="text" th:field="${event.contactEmail}"></label>
-        <p class="errors" th:errors="${event.contactEmail}"></p><br>
         <div class="form-group">
-            <label>Event Skill Category
-                <select th:field="${event.catName}">
+            <input type="text" th:field="${event.name}">
+            <p class="errors" th:errors="${event.name}"></p><br>
+        </div>
+
+        <div class="form-group">
+            <textarea type="text" th:field="${event.description}" class="form-control" rows="8"></textarea>
+            <p class="errors" th:errors="${event.description}"></p><br>
+        </div>
+
+        <div class="form-group">
+                <select th:field="${event.catName}" class="custom-select">
+                    <option value="" hidden>Category</option>
                     <option th:each="cat : ${cats}"
                             th:value="${cat.id}"
                             th:text="${cat.catName}"
                     ></option>
                 </select>
-            </label>
+            <p class="errors" th:errors="${event.catName}"></p>
         </div>
-        <input type="submit" value="Update Event" class="btn btn-success">
+        <div class="form-group">
+        <input type="hidden" th:value="${user.id}" name="creatorId" />
+        <input type="hidden" th:value="${user.email}" name="email" />
+            <button class="btn btn-primary btn-block" type="submit" value="Update">Update Class</button>
+        </div>
     </form>
+            </div>
+        </div>
+    </div>
 </main>
+
+<div th:replace="fragments :: footer"></div>
 
 </body>
 </html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="d-flex flex-column min-vh-100">
+
+<div th:replace="fragments :: navbar"></div>
+
+<main>
+    <h2>Skill Details</h2></span>
+    <form method="post" th:object="${skill}">
+        <div class="container body-content">
+            <table class="control-form" >
+                <tr>
+                    <th>Skill Name</th><td th:text="${skill.name}"></a></td>
+                </tr>
+                <tr>
+                    <th>Skill Category</th><td th:text="${skill.catName.catName}"> </td>
+                </tr>
+            </table>
+        </div>
+
+        <span th:if="${skillCheck == 'hasSkill'}"><div><input type="submit" value="Remove Skill" class="btn btn-success"></div></span>
+        <span th:unless="${skillCheck == 'hasSkill'}"><div><input type="submit" value="Add Skill" class="btn btn-success"></div></span>
+    </form>
+</main>
+
+<div th:replace="fragments :: footer"></div>
+
+</body>
+</html>

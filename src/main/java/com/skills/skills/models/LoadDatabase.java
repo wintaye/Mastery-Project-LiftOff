@@ -20,9 +20,25 @@
 //
 //        return args -> {
 //
-//            log.info("Preloading " + repository.save(new SkillsCategory("Charity/Non-Profit")));
-//            log.info("Preloading " + repository.save(new SkillsCategory("Ceramics")));
+////            log.info("Preloading " + repository.save(new Tag("Skills to Share")));
+////            log.info("Preloading " + repository.save(new Tag("Skills to Learn")));
+//            log.info("Preloading " + repository.save(new SkillsCategory("Coding")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Woodworking")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Dance")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Languages")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Ceramics")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Home Improvement")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Sports")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Music")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Film")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Science")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Crafting")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Painting/Drawing")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Gardening")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Cooking")));
+////            log.info("Preloading " + repository.save(new SkillsCategory("Baking")));
 //
 //        };
 //    }
 //}
+

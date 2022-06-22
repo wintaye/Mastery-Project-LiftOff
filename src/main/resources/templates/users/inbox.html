@@ -4,26 +4,53 @@
 <body class="d-flex flex-column min-vh-100">
 
 <div th:replace="fragments :: navbar"></div>
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
 
-<div class="container body-content">
-    <table class="control-form" th:each="message:${messages}">
-        <tr>
-            <th>Sender:</th>
-            <th>Time:</th>
-            <th>Subject:</th>
-            <th>Message:</th>
-        </tr>
-        <tr>
-            <td th:text="${message.sender}"></td>
-            <td th:text="${message.timestamp}"></td>
-            <td th:text="${message.messageSubject}"></td>
-            <td th:text="${message.messageBody}"></td>
-        </tr>
-    </table>
+<h2>Inbox</h2>
+
+<div class="card one-event-post mb-3">
+    <h4 class="card-header event-card-header">Received</h4>
+
 </div>
+<div class="container body-content">
+        <tr th:each="message : ${receivedMessages}">
+            <div>
+            <h4 class="card-header event-card-header" th:text="${message.subject}"></h4>
+                </div>
+            <div class="card-body">
+                <h8 class="text-muted" th:text="${message.senderUsername}"></h8>
+                <p class="text-muted" th:text="${message.timestamp}">
+                <p class="card-text" th:text="${message.body}"></p>
+            </div>
+            <div class="card-footer bg-transparent">
+                <ul class="list-inline">
+                    <li class="list-inline-item float-left"><a th:href="@{/users/compose/{messageId}(messageId=${message.getId})}" class="btn btn-primary text-white">Reply</a></li>
 
-
-
+                </ul>
+            </div>
+        </tr>
+</div>
+<p></p>
+<div class="card one-event-post mb-3">
+    <h4 class="card-header event-card-header">Sent</h4>
+</div>
+<div class="container body-content">
+<tr th:each="message : ${sentMessages}">
+    <h4 class="card-header event-card-header" th:text="${message.subject}"></h4>
+    <div class="card-body">
+        <h8 class="text-muted" th:text="${message.recipientUsername}"></h8>
+        <p class="text-muted" th:text="${message.timestamp}">
+        <p class="card-text" th:text="${message.body}"></p>
+    </div>
+</tr>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
 

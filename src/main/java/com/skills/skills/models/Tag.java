@@ -21,6 +21,7 @@ public class Tag extends AbstractEntity{
     private String tagName;
 
     public Tag(String tagName) { this.tagName = tagName; }
+
     public Tag() {}
 
     public String getTagName() { return tagName; }

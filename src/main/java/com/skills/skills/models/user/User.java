@@ -36,7 +36,10 @@ public class User extends AbstractEntity {
     private final List<Skill> skills = new ArrayList<>();
 
     @ManyToMany
-    private final List<Event> events = new ArrayList<>();
+    private final List<Event> creatorEvents = new ArrayList<>();
+
+    @ManyToMany
+    private final List<Event> guestEvents = new ArrayList<>();
 
 
     public User(String username, String password) {
@@ -65,13 +68,21 @@ public class User extends AbstractEntity {
 
     public List<Skill> getSkills() { return skills; }
 
-    public List<Event> getEvents() { return events; }
+    public List<Event> getCreatorEvents() { return creatorEvents; }
+
+    public List<Event> getGuestEvents() { return guestEvents; }
 
     public void addSkillsToProfile (Skill skill){ this.skills.add(skill); }
 
-    public void addEventToProfile(Event event) { this.events.add(event); }
+    public void removeSkillsFromProfile(Skill skill) { this.skills.remove(skill); }
 
-    public List<Message> getMessages () {return messages; }
+    public void addCreatorEventToProfile(Event event ) { this.creatorEvents.add(event); }
+
+    public void addGuestEventToProfile(Event event) { this.guestEvents.add(event); }
+
+    public void removeGuestEventFromProfile(Event event) { this.guestEvents.remove(event); }
+
+    public List<Message> getMessages (User user) {return user.messages; }
 
     public void addMessageToInbox (Message message) { this.messages.add(message); }
 

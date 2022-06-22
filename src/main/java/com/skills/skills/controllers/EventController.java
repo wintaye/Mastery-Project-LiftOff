@@ -5,9 +5,7 @@ import com.skills.skills.data.SkillsCategoryRepository;
 import com.skills.skills.data.TagRepository;
 import com.skills.skills.data.UserRepository;
 import com.skills.skills.models.event.Event;
-import com.skills.skills.models.skill.SkillsCategory;
 import com.skills.skills.models.user.User;
-import com.skills.skills.models.user.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,32 +53,45 @@ public class EventController {
     @GetMapping("create/{userId}")
     public String createNewEvent (@PathVariable Integer userId, Model model, HttpSession session){
         User user = getUserFormSession(session);
-        model.addAttribute("user", user);
         Optional<User> result = userRepository.findById(userId);
         User currentUser = result.get();
-        model.addAttribute("title", "Create New Event");
+        model.addAttribute("user", currentUser);
         model.addAttribute(new Event());
         model.addAttribute("categories", skillsCategoryRepository.findAll());
         return  "events/create";
     }
 
     @PostMapping("create/{userId}")
-    public String processNewEvent(@PathVariable Integer userId, HttpSession session, Model model, @ModelAttribute @Valid Event newEvent, Errors errors) {
+    public String processNewEvent(@PathVariable Integer userId, HttpSession session,
+                                  Model model, @ModelAttribute @Valid Event newEvent,
+                                  Errors errors) {
 
+        //find user
+        User user = getUserFormSession(session);
+        model.addAttribute("user", user);
         Optional<User> result = userRepository.findById(userId);
         User currentUser = result.get();
+
+        //validate event inputs
+        if (errors.hasErrors()){
+            model.addAttribute("categories", skillsCategoryRepository.findAll());
+            return "events/create";
+        }
+
         // save new event
         eventRepository.save(newEvent);
+
         //add event to user
-        currentUser.addEventToProfile(newEvent);
+        currentUser.addCreatorEventToProfile(newEvent);
         //re-save user to update
         userRepository.save(currentUser);
-        model.addAttribute("events", currentUser.getEvents());
+        model.addAttribute("creatorEvents", currentUser.getCreatorEvents());
+        model.addAttribute("guestEvents", currentUser.getGuestEvents());
         return "redirect:/users/profile";
     }
 
     @GetMapping("delete/{userId}")
-    public String displayDeleteSkillForm(Model model, HttpSession session){
+    public String displayDeleteEventForm(Model model, HttpSession session){
         User user = getUserFormSession(session);
         model.addAttribute("user", user);
         model.addAttribute("events", eventRepository.findAll());
@@ -96,7 +107,7 @@ public class EventController {
             }
         }
         userRepository.save(currentUser);
-        model.addAttribute("events", currentUser.getEvents());
+        model.addAttribute("events", currentUser.getCreatorEvents());
         return "redirect:/users/profile";
     }
 
@@ -121,15 +132,52 @@ public class EventController {
 
         currentEvent.setName(event.getName());
         currentEvent.setDescription(event.getDescription());
-        currentEvent.setContactEmail(event.getContactEmail());
         currentEvent.setCatName(event.getCatName());
+
 
         eventRepository.save(currentEvent);
         userRepository.save(currentUser);
         model.addAttribute("skills", currentUser.getSkills());
-        model.addAttribute("events", currentUser.getEvents());
+        model.addAttribute("creatorEvents", currentUser.getCreatorEvents());
+        model.addAttribute("guestEvents", currentUser.getGuestEvents());
         return "redirect:/users/profile";
     }
 
+    //responds to request at events/id={userId}&event={eventId}
+    @GetMapping("event_details/id={userId}&event={eventId}")
+    public String rsvpToEvent (@PathVariable Integer eventId, @PathVariable Integer userId, Model model, HttpSession session){
+        User user = getUserFormSession(session);
+        Optional<Event> event = eventRepository.findById(eventId);
+        Event currentEvent = event.get();
+        String eventCheck = new String();
+        if(user.getGuestEvents().contains(currentEvent)){
+            eventCheck = "guest";
+        } else if(user.getCreatorEvents().contains(currentEvent)){
+            eventCheck = "creator";
+        }
+        model.addAttribute("eventCheck", eventCheck);
+        model.addAttribute("user", user);
+        model.addAttribute("event", currentEvent);
+        return "events/event_details";
+    }
+
+    @PostMapping("event_details/id={userId}&event={eventId}")
+    public String processRSVPToEvent (@PathVariable Integer eventId, @PathVariable Integer userId, Model model, HttpSession session){
+        User user = getUserFormSession(session);
+        model.addAttribute("user", user);
+
+        Optional<Event> result1 = eventRepository.findById(eventId);
+        Event currentEvent = result1.get();
+        if(user.getGuestEvents().contains(currentEvent) == false){
+            user.addGuestEventToProfile(currentEvent);
+        }else if(user.getGuestEvents().contains(currentEvent) != false){
+            user.removeGuestEventFromProfile(currentEvent);
+        }
+        userRepository.save(user);
+        model.addAttribute("skills", user.getSkills());
+        model.addAttribute("creatorEvents", user.getCreatorEvents());
+        model.addAttribute("guestEvents", user.getGuestEvents());
+        return "redirect:/users/profile";
+    }
 
 }

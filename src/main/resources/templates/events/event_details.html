@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="d-flex flex-column min-vh-100">
+
+<div th:replace="fragments :: navbar"></div>
+
+<main>
+    <span th:if="${eventCheck == 'creator'}"><h2>My Event Details</h2></span>
+    <span th:unless="${eventCheck == 'creator'}"><h2>Event Details</h2></span>
+    <form method="post" th:object="${event}">
+        <div class="container body-content">
+            <table class="control-form" >
+                <tr>
+                    <th>Name</th><td th:text="${event.name}"></a></td>
+                </tr>
+                <tr>
+                    <th>Description</th><td th:text="${event.description}"> </td>
+                </tr>
+                <tr>
+                   <th><span th:if="${eventCheck == 'guest'}"><a th:href="@{/events/event_message/event={eventId}(eventId=${event.id})}">Message Host</a></span></th>
+                </tr>
+            </table>
+        </div>
+
+
+        <span th:if="${eventCheck == 'guest'}"><div><input type="submit" value="Remove Event" class="btn btn-success"></div></span>
+
+        <span th:if="${eventCheck == ''}"><div><input type="submit" value="RSVP" class="btn btn-success"></div></span>
+        <span th:if="${eventCheck == ''}"><a th:href="@{/events/event_message/event={eventId}(eventId=${event.id})}">Message Host</a></span>
+        <span th:if="${eventCheck == 'creator'}"><a th:href="@{/events/edit/id={id}&event={eventId}(id=${user.id}, eventId=${event.id})}">Edit Event Details</a></span>
+    </form>
+</main>
+
+<div th:replace="fragments :: footer"></div>
+
+</body>
+</html>
